@@ -475,7 +475,9 @@ sa_rope$signif <- ifelse(sa_rope$signif == TRUE, "Significant", "Insignificant")
 
 ### 2.3.4. Results
 
-> Of 760 elders with ADRD, 696 (91.6%) were elders who had one or more living spouses or children at the onset of ADRD. 64 (8.4%) were elders who did not have any living spouses or children at the onset of ADRD. The hazard of death among elders without family was estimated to be 24% higher compared to elders with family (HR = 1.24; 95% CI = [0.92, 1.67]). However, survival experience among elders without family was not statistically different from elders with family (Cox PH model, p-value > 0.05). 
+* Of 760 elders with ADRD, 696 (91.6%) were elders who had one or more living spouses or children at the onset of ADRD. 64 (8.4%) were elders who did not have any living spouses or children at the onset of ADRD.
+* The hazard of death among elders without family was estimated to be 24% higher compared to elders with family, adjusted for demographic covariates (HR = 1.24; 95% CI = [0.92, 1.67]).
+* However, survival experience among elders without family was **NOT** statistically different from elders with family (Cox PH model, p-value > 0.05). 
 
 ### 2.3.5. Limitations
 * Limited sample size
@@ -490,5 +492,5 @@ sa_rope$signif <- ifelse(sa_rope$signif == TRUE, "Significant", "Insignificant")
   + 90% of the participants were non-Hispanic White who have a membership at Kaiser Permanente.
 
 # 3. Conclusion
-> **This study found that elders without family live as long as elders with family among those diagnosed with ADRD. Future research is needed to gain an understanding of situations and challenges elder orphans face by assessing other health outcomes (i.e. time to nursing home).** 
+**This study found that elders without family live as long as elders with family among those diagnosed with ADRD. Future research is needed to gain an understanding of situations and challenges elder orphans face by assessing other health outcomes (i.e. time to nursing home).** 
 

@@ -155,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level1">
 <h1>0. Introduction</h1>
 <ul>
-<li>An estimated 5.8 million Americans age 65 and older are living with Alzheimer’s disease and related dementias (ADRD) in 2020. Little is known about situations of elders with ADRD who do not have family support.</li>
+<li>An estimated 5.8 million Americans age 65 and older are living with Alzheimer’s disease and related dementias (ADRD) in 2020. Little is known about situations of elders with ADRD who do not have any family support.</li>
 </ul>
 <blockquote class="blockquote">
 <p><strong>Question: Do elders without family live shorter than elders with family among those diagnosed with Alzheimer’s Disease and Related Dementias (ADRD)?</strong></p>
@@ -403,7 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="create-a-time-variable" class="level3">
 <h3 class="anchored" data-anchor-id="create-a-time-variable">1.3.4. Create a time variable</h3>
 <ul>
-<li>We are going to create a variable that indicates how many years each participant lived after the onset of ADRD.</li>
+<li>First, we are going to create a variable that indicates how many years each participant lived after the onset of ADRD.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a variable for the study end date (Sep 30, 2016)</span></span>
@@ -466,7 +466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="create-a-demographic-table" class="level2">
 <h2 class="anchored" data-anchor-id="create-a-demographic-table">2.1. Create a Demographic Table</h2>
 <ul>
-<li>Now, we have all the variables needed for our analysis. Let’s see the demographics of the sample set.</li>
+<li>Now, we have all the variables needed for our analysis. Let’s see the demographics of the dataset.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add labels to variables</span></span>
@@ -667,7 +667,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="plot-the-kaplan-meier-estimator">2.2.2. Plot the Kaplan-Meier Estimator</h3>
 <ul>
 <li>The Kaplan-Meier estimator is widely used to estimate a survival function and visualize survival experience in clinical research.</li>
-<li>The below plot compares survival experience among elders without family to elders with family. This plot is NOT accounted for the other explanatory variable than <code>elder_orphan</code>.</li>
+<li>The below plot compares survival experience among elders without family to elders with family. This plot is <strong>NOT</strong> accounted for the other explanatory variable than <code>elder_orphan</code>.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ggsurv <span class="ot">&lt;-</span> <span class="fu">ggsurvplot</span>(</span>
@@ -793,23 +793,23 @@ GLOBAL       6.2347  5 0.284</code></pre>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        age_onset <span class="sc">+</span> educ_bin <span class="sc">+</span> sex <span class="sc">+</span> charlson, <span class="at">data =</span> adrd_act) <span class="sc">%&gt;%</span> </span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">tbl_regression</span>(<span class="at">exp =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="txttebfadb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#txttebfadb table {
+<div id="jvwdpdmzjc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jvwdpdmzjc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#txttebfadb thead, #txttebfadb tbody, #txttebfadb tfoot, #txttebfadb tr, #txttebfadb td, #txttebfadb th {
+#jvwdpdmzjc thead, #jvwdpdmzjc tbody, #jvwdpdmzjc tfoot, #jvwdpdmzjc tr, #jvwdpdmzjc td, #jvwdpdmzjc th {
   border-style: none;
 }
 
-#txttebfadb p {
+#jvwdpdmzjc p {
   margin: 0;
   padding: 0;
 }
 
-#txttebfadb .gt_table {
+#jvwdpdmzjc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -835,12 +835,12 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#txttebfadb .gt_caption {
+#jvwdpdmzjc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#txttebfadb .gt_title {
+#jvwdpdmzjc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -852,7 +852,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-bottom-width: 0;
 }
 
-#txttebfadb .gt_subtitle {
+#jvwdpdmzjc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -864,7 +864,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-top-width: 0;
 }
 
-#txttebfadb .gt_heading {
+#jvwdpdmzjc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -876,13 +876,13 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#txttebfadb .gt_bottom_border {
+#jvwdpdmzjc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#txttebfadb .gt_col_headings {
+#jvwdpdmzjc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -897,7 +897,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#txttebfadb .gt_col_heading {
+#jvwdpdmzjc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -917,7 +917,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   overflow-x: hidden;
 }
 
-#txttebfadb .gt_column_spanner_outer {
+#jvwdpdmzjc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -929,15 +929,15 @@ GLOBAL       6.2347  5 0.284</code></pre>
   padding-right: 4px;
 }
 
-#txttebfadb .gt_column_spanner_outer:first-child {
+#jvwdpdmzjc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#txttebfadb .gt_column_spanner_outer:last-child {
+#jvwdpdmzjc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#txttebfadb .gt_column_spanner {
+#jvwdpdmzjc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -949,11 +949,11 @@ GLOBAL       6.2347  5 0.284</code></pre>
   width: 100%;
 }
 
-#txttebfadb .gt_spanner_row {
+#jvwdpdmzjc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#txttebfadb .gt_group_heading {
+#jvwdpdmzjc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -979,7 +979,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   text-align: left;
 }
 
-#txttebfadb .gt_empty_group_heading {
+#jvwdpdmzjc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -994,15 +994,15 @@ GLOBAL       6.2347  5 0.284</code></pre>
   vertical-align: middle;
 }
 
-#txttebfadb .gt_from_md > :first-child {
+#jvwdpdmzjc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#txttebfadb .gt_from_md > :last-child {
+#jvwdpdmzjc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#txttebfadb .gt_row {
+#jvwdpdmzjc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1021,7 +1021,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   overflow-x: hidden;
 }
 
-#txttebfadb .gt_stub {
+#jvwdpdmzjc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1034,7 +1034,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   padding-right: 5px;
 }
 
-#txttebfadb .gt_stub_row_group {
+#jvwdpdmzjc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1048,15 +1048,15 @@ GLOBAL       6.2347  5 0.284</code></pre>
   vertical-align: top;
 }
 
-#txttebfadb .gt_row_group_first td {
+#jvwdpdmzjc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#txttebfadb .gt_row_group_first th {
+#jvwdpdmzjc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#txttebfadb .gt_summary_row {
+#jvwdpdmzjc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1066,16 +1066,16 @@ GLOBAL       6.2347  5 0.284</code></pre>
   padding-right: 5px;
 }
 
-#txttebfadb .gt_first_summary_row {
+#jvwdpdmzjc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#txttebfadb .gt_first_summary_row.thick {
+#jvwdpdmzjc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#txttebfadb .gt_last_summary_row {
+#jvwdpdmzjc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1085,7 +1085,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#txttebfadb .gt_grand_summary_row {
+#jvwdpdmzjc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1095,7 +1095,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   padding-right: 5px;
 }
 
-#txttebfadb .gt_first_grand_summary_row {
+#jvwdpdmzjc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1105,7 +1105,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#txttebfadb .gt_last_grand_summary_row_top {
+#jvwdpdmzjc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1115,11 +1115,11 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#txttebfadb .gt_striped {
+#jvwdpdmzjc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#txttebfadb .gt_table_body {
+#jvwdpdmzjc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1128,7 +1128,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#txttebfadb .gt_footnotes {
+#jvwdpdmzjc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1142,7 +1142,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#txttebfadb .gt_footnote {
+#jvwdpdmzjc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1151,7 +1151,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   padding-right: 5px;
 }
 
-#txttebfadb .gt_sourcenotes {
+#jvwdpdmzjc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1165,7 +1165,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#txttebfadb .gt_sourcenote {
+#jvwdpdmzjc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1173,72 +1173,72 @@ GLOBAL       6.2347  5 0.284</code></pre>
   padding-right: 5px;
 }
 
-#txttebfadb .gt_left {
+#jvwdpdmzjc .gt_left {
   text-align: left;
 }
 
-#txttebfadb .gt_center {
+#jvwdpdmzjc .gt_center {
   text-align: center;
 }
 
-#txttebfadb .gt_right {
+#jvwdpdmzjc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#txttebfadb .gt_font_normal {
+#jvwdpdmzjc .gt_font_normal {
   font-weight: normal;
 }
 
-#txttebfadb .gt_font_bold {
+#jvwdpdmzjc .gt_font_bold {
   font-weight: bold;
 }
 
-#txttebfadb .gt_font_italic {
+#jvwdpdmzjc .gt_font_italic {
   font-style: italic;
 }
 
-#txttebfadb .gt_super {
+#jvwdpdmzjc .gt_super {
   font-size: 65%;
 }
 
-#txttebfadb .gt_footnote_marks {
+#jvwdpdmzjc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#txttebfadb .gt_asterisk {
+#jvwdpdmzjc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#txttebfadb .gt_indent_1 {
+#jvwdpdmzjc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#txttebfadb .gt_indent_2 {
+#jvwdpdmzjc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#txttebfadb .gt_indent_3 {
+#jvwdpdmzjc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#txttebfadb .gt_indent_4 {
+#jvwdpdmzjc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#txttebfadb .gt_indent_5 {
+#jvwdpdmzjc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#txttebfadb .katex-display {
+#jvwdpdmzjc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#txttebfadb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jvwdpdmzjc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1411,9 +1411,11 @@ GLOBAL       6.2347  5 0.284</code></pre>
 </section>
 <section id="results" class="level3">
 <h3 class="anchored" data-anchor-id="results">2.3.4. Results</h3>
-<blockquote class="blockquote">
-<p>Of 760 elders with ADRD, 696 (91.6%) were elders who had one or more living spouses or children at the onset of ADRD. 64 (8.4%) were elders who did not have any living spouses or children at the onset of ADRD. The hazard of death among elders without family was estimated to be 24% higher compared to elders with family (HR = 1.24; 95% CI = [0.92, 1.67]). However, survival experience among elders without family was not statistically different from elders with family (Cox PH model, p-value &gt; 0.05).</p>
-</blockquote>
+<ul>
+<li>Of 760 elders with ADRD, 696 (91.6%) were elders who had one or more living spouses or children at the onset of ADRD. 64 (8.4%) were elders who did not have any living spouses or children at the onset of ADRD.</li>
+<li>The hazard of death among elders without family was estimated to be 24% higher compared to elders with family, adjusted for demographic covariates (HR = 1.24; 95% CI = [0.92, 1.67]).</li>
+<li>However, survival experience among elders without family was <strong>NOT</strong> statistically different from elders with family (Cox PH model, p-value &gt; 0.05).</li>
+</ul>
 </section>
 <section id="limitations" class="level3">
 <h3 class="anchored" data-anchor-id="limitations">2.3.5. Limitations</h3>
@@ -1444,9 +1446,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
 </section>
 <section id="conclusion" class="level1">
 <h1>3. Conclusion</h1>
-<blockquote class="blockquote">
 <p><strong>This study found that elders without family live as long as elders with family among those diagnosed with ADRD. Future research is needed to gain an understanding of situations and challenges elder orphans face by assessing other health outcomes (i.e.&nbsp;time to nursing home).</strong></p>
-</blockquote>
 </section>
 
 </main>
