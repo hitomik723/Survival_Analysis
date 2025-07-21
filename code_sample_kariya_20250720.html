@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Hitomi Kariya">
+<meta name="dcterms.date" content="2025-07-20">
+
+<title>Alzheimer’s Disease Research Study</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="code_sample_kariya_20250720_files/libs/clipboard/clipboard.min.js"></script>
+<script src="code_sample_kariya_20250720_files/libs/quarto-html/quarto.js"></script>
+<script src="code_sample_kariya_20250720_files/libs/quarto-html/popper.min.js"></script>
+<script src="code_sample_kariya_20250720_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="code_sample_kariya_20250720_files/libs/quarto-html/anchor.min.js"></script>
+<link href="code_sample_kariya_20250720_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="code_sample_kariya_20250720_files/libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="code_sample_kariya_20250720_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="code_sample_kariya_20250720_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="code_sample_kariya_20250720_files/libs/bootstrap/bootstrap-c0367b04c37547644fece4185067e4a7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="code_sample_kariya_20250720_files/libs/table1-1.0/table1_defaults.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">0. Introduction</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">1. Data Preparation</a>
+  <ul>
+  <li><a href="#import-a-data-set" id="toc-import-a-data-set" class="nav-link" data-scroll-target="#import-a-data-set">1.1. Import a data set</a></li>
+  <li><a href="#check-the-data-set" id="toc-check-the-data-set" class="nav-link" data-scroll-target="#check-the-data-set">1.2. Check the data set</a></li>
+  <li><a href="#clean-the-data-set" id="toc-clean-the-data-set" class="nav-link" data-scroll-target="#clean-the-data-set">1.3. Clean the data set</a>
+  <ul class="collapse">
+  <li><a href="#select-variables-needed-for-analysis" id="toc-select-variables-needed-for-analysis" class="nav-link" data-scroll-target="#select-variables-needed-for-analysis">1.3.1. Select variables needed for analysis</a></li>
+  <li><a href="#check-na-values" id="toc-check-na-values" class="nav-link" data-scroll-target="#check-na-values">1.3.2. Check NA values</a></li>
+  <li><a href="#modify-variables" id="toc-modify-variables" class="nav-link" data-scroll-target="#modify-variables">1.3.3. Modify variables</a></li>
+  <li><a href="#create-a-time-variable" id="toc-create-a-time-variable" class="nav-link" data-scroll-target="#create-a-time-variable">1.3.4. Create a time variable</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#survival-analysis" id="toc-survival-analysis" class="nav-link" data-scroll-target="#survival-analysis">2. Survival Analysis</a>
+  <ul>
+  <li><a href="#create-a-demographic-table" id="toc-create-a-demographic-table" class="nav-link" data-scroll-target="#create-a-demographic-table">2.1. Create a Demographic Table</a></li>
+  <li><a href="#visualize-survival-experience" id="toc-visualize-survival-experience" class="nav-link" data-scroll-target="#visualize-survival-experience">2.2. Visualize Survival Experience</a>
+  <ul class="collapse">
+  <li><a href="#create-a-survival-object" id="toc-create-a-survival-object" class="nav-link" data-scroll-target="#create-a-survival-object">2.2.1. Create a survival object</a></li>
+  <li><a href="#plot-the-kaplan-meier-estimator" id="toc-plot-the-kaplan-meier-estimator" class="nav-link" data-scroll-target="#plot-the-kaplan-meier-estimator">2.2.2. Plot the Kaplan-Meier Estimator</a></li>
+  </ul></li>
+  <li><a href="#fit-a-cox-regression-model" id="toc-fit-a-cox-regression-model" class="nav-link" data-scroll-target="#fit-a-cox-regression-model">2.3. Fit a Cox Regression Model</a>
+  <ul class="collapse">
+  <li><a href="#test-the-proportional-hazard-assumption" id="toc-test-the-proportional-hazard-assumption" class="nav-link" data-scroll-target="#test-the-proportional-hazard-assumption">2.3.1. Test the Proportional Hazard Assumption</a></li>
+  <li><a href="#create-a-summary-table" id="toc-create-a-summary-table" class="nav-link" data-scroll-target="#create-a-summary-table">2.3.2. Create a Summary Table</a></li>
+  <li><a href="#create-a-ropeladder-plot" id="toc-create-a-ropeladder-plot" class="nav-link" data-scroll-target="#create-a-ropeladder-plot">2.3.3. Create a Ropeladder Plot</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">2.3.4. Results</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">2.3.5. Limitations</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">3. Conclusion</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Alzheimer’s Disease Research Study</h1>
+<p class="subtitle lead">Effect of Family Support on Survival Experience among Elders with Alzheimer’s Disease and Related Dementias (ADRD)</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Hitomi Kariya </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 20, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>0. Introduction</h1>
+<ul>
+<li>An estimated 5.8 million Americans age 65 and older are living with Alzheimer’s disease and related dementias (ADRD) in 2020. Little is known about situations of elders with ADRD who do not have family support.</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Question: Do elders without family live shorter than elders with family among those diagnosed with Alzheimer’s Disease and Related Dementias (ADRD)?</strong></p>
+</blockquote>
+<ul>
+<li><p>This is a secondary analysis of the Adult Changes in Thought (ACT) study at Kaiser Permanente Washington, the longest-running cohort study examining cognitive health in the United States since 1986.</p></li>
+<li><p>I assessed survival experience among elders who were diagnosed with ADRD between <code>2006</code> (when an electronic medical records system was fully in place at Kaiser Permanente Washington, making electronic searching of health records feasible) and <code>2016</code> (the most recent year for which dementia diagnoses have been confirmed at one-year followup as per the ACT study protocol).</p></li>
+</ul>
+<div class="l-body-outset">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 76%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Elders</td>
+<td>Adults aged older than 65 years</td>
+</tr>
+<tr class="even">
+<td>Elders with family</td>
+<td>Elders who have one or more living spouses or children at the onset of ADRD</td>
+</tr>
+<tr class="odd">
+<td>Elders without family</td>
+<td>Elders who do not have any living spouses or children at the onset of ADRD</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="data-preparation" class="level1">
+<h1>1. Data Preparation</h1>
+<section id="import-a-data-set" class="level2">
+<h2 class="anchored" data-anchor-id="import-a-data-set">1.1. Import a data set</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove all objects in the environment</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># import libraries</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign) <span class="co"># import Stata file</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven) <span class="co"># import Stata file</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival) <span class="co"># plot survival curves using R base graphs</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer) <span class="co"># plot survival curves using ggplot2</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer) <span class="co"># for nice colors</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel) <span class="co"># labels for ggplot2</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstance) <span class="co"># flipped version of geoms</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(table1) <span class="co"># create table1</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table) <span class="co"># setnames</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary) <span class="co"># create summary tables</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom.helpers) <span class="co">#coxph+gtsummary</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled) <span class="co">#coxph+gtsummary</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># import the data set</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>adrd_act <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"adrd_act.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-the-data-set" class="level2">
+<h2 class="anchored" data-anchor-id="check-the-data-set">1.2. Check the data set</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">glimpse</span>(adrd_act)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The result is not shown due to confidentiality</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>848 observations of 164 variables</li>
+</ul>
+</section>
+<section id="clean-the-data-set" class="level2">
+<h2 class="anchored" data-anchor-id="clean-the-data-set">1.3. Clean the data set</h2>
+<section id="select-variables-needed-for-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="select-variables-needed-for-analysis">1.3.1. Select variables needed for analysis</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select variables used for this analysis (164 -&gt; 12 variables)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>adrd_act <span class="ot">&lt;-</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  adrd_act <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="st">"studyid"</span>,<span class="st">"bln_flag_dead_asof_30sep2016"</span>, <span class="st">"bln_onsetdate"</span>, <span class="st">"bln_deathdt"</span>, <span class="st">"bln_withdrawdt"</span>, <span class="st">"dql_true_elder_orphan"</span>, <span class="st">"bln_age_at_onset"</span>, <span class="st">"bln_education"</span>, <span class="st">"bln_gender"</span>, <span class="st">"ein_charlson"</span>, <span class="st">"bln_race"</span>, <span class="st">"bln_hispanic"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># change column names </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>adrd_act <span class="ot">&lt;-</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setnames</span>(adrd_act,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">old =</span> <span class="fu">c</span>(<span class="st">"studyid"</span>, <span class="st">"bln_flag_dead_asof_30sep2016"</span>, <span class="st">"bln_onsetdate"</span>, <span class="st">"bln_deathdt"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"bln_withdrawdt"</span>, <span class="st">"dql_true_elder_orphan"</span>, <span class="st">"bln_age_at_onset"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"bln_education"</span>, <span class="st">"bln_gender"</span>, <span class="st">"ein_charlson"</span>, <span class="st">"bln_race"</span>, <span class="st">"bln_hispanic"</span>),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">new =</span> <span class="fu">c</span>(<span class="st">"studyid"</span>, <span class="st">"flag_death"</span>, <span class="st">"onset_date"</span>, <span class="st">"death_date"</span>, <span class="st">"withdraw_date"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"elder_orphan"</span>, <span class="st">"age_onset"</span>, <span class="st">"education"</span>, <span class="st">"sex"</span>, <span class="st">"charlson"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"race"</span>, <span class="st">"ethnicity"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-na-values" class="level3">
+<h3 class="anchored" data-anchor-id="check-na-values">1.3.2. Check NA values</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># count NA in each column</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>adrd_act_num_na <span class="ot">&lt;-</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="fu">numeric</span>(<span class="fu">ncol</span>(adrd_act)), <span class="fu">colnames</span>(adrd_act))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(adrd_act)) {</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  adrd_act_num_na[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(adrd_act[[i]]))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>adrd_act_num_na <span class="co"># 88 NAs in elder_orphan</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      studyid    flag_death    onset_date    death_date withdraw_date 
+            0             0             0           200           832 
+ elder_orphan     age_onset     education           sex      charlson 
+           88             0             0             0             0 
+         race     ethnicity 
+            0             0 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove observations with NA in elder_orphan</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>na_rem <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(adrd_act<span class="sc">$</span>elder_orphan)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>adrd_act <span class="ot">&lt;-</span> adrd_act[<span class="fu">which</span>(na_rem),]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 760 observations</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>There are many NA values in <code>death_date</code> and <code>withdraw_date</code>. <code>death_date</code> is filled with NA for participants who did not die during the study. <code>withdraw_date</code> is filled with NA for participants who did not disenroll from the study.</li>
+</ul>
+</section>
+<section id="modify-variables" class="level3">
+<h3 class="anchored" data-anchor-id="modify-variables">1.3.3. Modify variables</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># factorize the variables (elder orphans, sex)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"elder_orphan"</span>, <span class="st">"sex"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>adrd_act <span class="ot">&lt;-</span> adrd_act <span class="sc">%&gt;%</span> <span class="fu">mutate_at</span>(cols, <span class="fu">funs</span>(<span class="fu">factor</span>(.)))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># put labels for levels </span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>elder_orphan <span class="ot">&lt;-</span> </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">factor</span>(adrd_act<span class="sc">$</span>elder_orphan,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Elders with family"</span>, <span class="co"># reference</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Elders without family"</span>))</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># recode the gender variable: 1 = male, 2 = female -&gt; 0 = female, 1 = male (female as ref)</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(adrd_act<span class="sc">$</span>sex <span class="sc">==</span> <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>sex <span class="ot">&lt;-</span> </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">factor</span>(adrd_act<span class="sc">$</span>sex,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="co"># reference</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Male"</span>))</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># recode the race variable</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>race_bin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(adrd_act<span class="sc">$</span>race <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>race_bin <span class="ot">&lt;-</span> </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">factor</span>(adrd_act<span class="sc">$</span>race_bin,</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"White"</span>, <span class="co"># reference</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Non-White"</span>))</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co"># recode the ethnicity variable</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>ethnicity_bin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(adrd_act<span class="sc">$</span>ethnicity <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>ethnicity_bin <span class="ot">&lt;-</span> </span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">factor</span>(adrd_act<span class="sc">$</span>ethnicity_bin,</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>         <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Non-Hispanic"</span>, <span class="co"># reference</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Hispanic"</span>))</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="co"># recode the education variable from continuous to binary</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>educ_bin <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(adrd_act<span class="sc">$</span>education <span class="sc">&lt;=</span> <span class="dv">18</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="co"># less than 13 years (= high school graduate or less) = 0</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="co"># 13 or more than 13 years (= college or more) = 1</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>educ_bin <span class="ot">&lt;-</span> </span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">factor</span>(adrd_act<span class="sc">$</span>educ_bin,</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>         <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"≤18 years"</span>, <span class="co"># reference</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"&gt;18 years"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Below is a list of variables we will use for our survival analysis.</li>
+</ul>
+<div class="l-body-outset">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Variables</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>studyid</code></td>
+<td>Subject’s study ID</td>
+</tr>
+<tr class="even">
+<td><code>flag_death</code></td>
+<td>Whether the subject was dead or not at the end of the study (September 30, 2016)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>0 = Alive (active or discontinued), 1 = Dead</td>
+</tr>
+<tr class="even">
+<td><code>death_date</code></td>
+<td>Date of death</td>
+</tr>
+<tr class="odd">
+<td><code>withdraw_date</code></td>
+<td>Date of discontinuation from the ACT study</td>
+</tr>
+<tr class="even">
+<td><code>elder_orphan</code></td>
+<td>Whether the subject had any living family members or not at the onset of ADRD</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>0 = Had one or more living spouse or child, 1 = Had no living spouse or child</td>
+</tr>
+<tr class="even">
+<td><code>age_onset</code></td>
+<td>Age at the onset of ADRD</td>
+</tr>
+<tr class="odd">
+<td><code>educ_bin</code></td>
+<td>Years of education completed (0 = 18 or less than 18 years, 1 = More than 18 years)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>0 = 18 or less than 18 years, 1 = More than 18 years</td>
+</tr>
+<tr class="odd">
+<td><code>sex</code></td>
+<td>Sex at birth</td>
+</tr>
+<tr class="even">
+<td><code>charlson</code></td>
+<td><a href="https://www.mdcalc.com/charlson-comorbidity-index-cci">Charlson Comorbidity Index</a> predicts the ten-year mortality for a patient who may have a range of comorbid conditions.</td>
+</tr>
+<tr class="odd">
+<td><code>race_bin</code></td>
+<td>0 = White, 1 = Non-White</td>
+</tr>
+<tr class="even">
+<td><code>ethnicity_bin</code></td>
+<td>0 = Non-Hispanic, 1 = Hispanic</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="create-a-time-variable" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-time-variable">1.3.4. Create a time variable</h3>
+<ul>
+<li>We are going to create a variable that indicates how many years each participant lived after the onset of ADRD.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a variable for the study end date (Sep 30, 2016)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>end_date <span class="ot">&lt;-</span> <span class="st">"2016-09-30"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>end_date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(adrd_act<span class="sc">$</span>end_date)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create the time variable (survival years from the onset)</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>surv_years <span class="ot">&lt;-</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(adrd_act<span class="sc">$</span>flag_death <span class="sc">==</span> <span class="dv">1</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>         ((adrd_act<span class="sc">$</span>death_date <span class="sc">-</span> adrd_act<span class="sc">$</span>onset_date)<span class="sc">/</span><span class="fl">365.25</span>),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>         <span class="cn">NA</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>surv_years <span class="ot">&lt;-</span> </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(adrd_act<span class="sc">$</span>flag_death <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> adrd_act<span class="sc">$</span>withdraw_date <span class="sc">&lt;</span> <span class="st">"2016-10-01"</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>         ((adrd_act<span class="sc">$</span>withdraw_date <span class="sc">-</span> adrd_act<span class="sc">$</span>onset_date)<span class="sc">/</span><span class="fl">365.25</span>),</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>         adrd_act<span class="sc">$</span>surv_years)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>surv_years <span class="ot">&lt;-</span> </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>((adrd_act<span class="sc">$</span>flag_death <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">is.na</span>(adrd_act<span class="sc">$</span>withdraw_date)) <span class="sc">|</span> (adrd_act<span class="sc">$</span>flag_death <span class="sc">==</span> <span class="dv">0</span> <span class="sc">&amp;</span> adrd_act<span class="sc">$</span>withdraw_date <span class="sc">&gt;</span> <span class="st">"2016-09-30"</span>),</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>         ((adrd_act<span class="sc">$</span>end_date <span class="sc">-</span> adrd_act<span class="sc">$</span>onset_date)<span class="sc">/</span><span class="fl">365.25</span>),</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>         adrd_act<span class="sc">$</span>surv_years)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 365.25 = the average number of days in a year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check if there is NA values</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>adrd_act <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">is.na</span>(surv_years)) <span class="co"># no NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 17
+# ℹ 17 variables: studyid &lt;chr&gt;, flag_death &lt;dbl&gt;, onset_date &lt;date&gt;,
+#   death_date &lt;date&gt;, withdraw_date &lt;date&gt;, elder_orphan &lt;fct&gt;,
+#   age_onset &lt;dbl&gt;, education &lt;dbl&gt;, sex &lt;fct&gt;, charlson &lt;dbl&gt;, race &lt;dbl&gt;,
+#   ethnicity &lt;dbl&gt;, race_bin &lt;fct&gt;, ethnicity_bin &lt;fct&gt;, educ_bin &lt;fct&gt;,
+#   end_date &lt;date&gt;, surv_years &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 76%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variables</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>surv_years</code></td>
+<td>Living years after the onset of ADRD</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="survival-analysis" class="level1">
+<h1>2. Survival Analysis</h1>
+<section id="create-a-demographic-table" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-demographic-table">2.1. Create a Demographic Table</h2>
+<ul>
+<li>Now, we have all the variables needed for our analysis. Let’s see the demographics of the sample set.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add labels to variables</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>surv_years) <span class="ot">&lt;-</span> <span class="st">"Years lived after onset"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>elder_orphan) <span class="ot">&lt;-</span> <span class="st">"Family situation"</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>age_onset) <span class="ot">&lt;-</span> <span class="st">"Age at onset"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>race_bin) <span class="ot">&lt;-</span> <span class="st">"Race"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>ethnicity_bin) <span class="ot">&lt;-</span> <span class="st">"Ethnicity"</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>sex) <span class="ot">&lt;-</span> <span class="st">"Sex at birth"</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>educ_bin) <span class="ot">&lt;-</span> <span class="st">"Education"</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>charlson) <span class="ot">&lt;-</span> <span class="st">"Charlson Comorbidity Index"</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># add units to variables</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(adrd_act<span class="sc">$</span>educ_bin) <span class="ot">&lt;-</span> <span class="st">"years"</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>(table1 <span class="ot">&lt;-</span> <span class="fu">table1</span>(<span class="sc">~</span> surv_years <span class="sc">+</span> age_onset <span class="sc">+</span> race_bin <span class="sc">+</span> ethnicity_bin <span class="sc">+</span> sex <span class="sc">+</span> educ_bin <span class="sc">+</span> charlson <span class="sc">|</span> elder_orphan, <span class="at">data =</span> adrd_act))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="Rtable1">
+<table class="Rtable1 caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th class="rowlabel firstrow lastrow" data-quarto-table-cell-role="th"></th>
+<th class="firstrow lastrow" data-quarto-table-cell-role="th"><span class="stratlabel">Elders with family<br>
+<span class="stratn">(N=696)</span></span></th>
+<th class="firstrow lastrow" data-quarto-table-cell-role="th"><span class="stratlabel">Elders without family<br>
+<span class="stratn">(N=64)</span></span></th>
+<th class="firstrow lastrow" data-quarto-table-cell-role="th"><span class="stratlabel">Overall<br>
+<span class="stratn">(N=760)</span></span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="rowlabel firstrow">Years lived after onset</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="even">
+<td class="rowlabel">Mean (SD)</td>
+<td>4.64 (2.60)</td>
+<td>4.18 (2.29)</td>
+<td>4.60 (2.58)</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel lastrow">Median [Min, Max]</td>
+<td class="lastrow">4.14 [1.10, 19.3]</td>
+<td class="lastrow">3.57 [1.11, 11.3]</td>
+<td class="lastrow">4.07 [1.10, 19.3]</td>
+</tr>
+<tr class="even">
+<td class="rowlabel firstrow">Age at onset</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="odd">
+<td class="rowlabel">Mean (SD)</td>
+<td>85.3 (6.08)</td>
+<td>87.0 (7.03)</td>
+<td>85.5 (6.18)</td>
+</tr>
+<tr class="even">
+<td class="rowlabel lastrow">Median [Min, Max]</td>
+<td class="lastrow">86.0 [67.0, 102]</td>
+<td class="lastrow">87.5 [71.0, 103]</td>
+<td class="lastrow">86.0 [67.0, 103]</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel firstrow">Race</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="even">
+<td class="rowlabel">White</td>
+<td>635 (91.2%)</td>
+<td>55 (85.9%)</td>
+<td>690 (90.8%)</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel lastrow">Non-White</td>
+<td class="lastrow">61 (8.8%)</td>
+<td class="lastrow">9 (14.1%)</td>
+<td class="lastrow">70 (9.2%)</td>
+</tr>
+<tr class="even">
+<td class="rowlabel firstrow">Ethnicity</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="odd">
+<td class="rowlabel">Non-Hispanic</td>
+<td>690 (99.1%)</td>
+<td>62 (96.9%)</td>
+<td>752 (98.9%)</td>
+</tr>
+<tr class="even">
+<td class="rowlabel lastrow">Hispanic</td>
+<td class="lastrow">6 (0.9%)</td>
+<td class="lastrow">2 (3.1%)</td>
+<td class="lastrow">8 (1.1%)</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel firstrow">Sex at birth</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="even">
+<td class="rowlabel">Female</td>
+<td>426 (61.2%)</td>
+<td>45 (70.3%)</td>
+<td>471 (62.0%)</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel lastrow">Male</td>
+<td class="lastrow">270 (38.8%)</td>
+<td class="lastrow">19 (29.7%)</td>
+<td class="lastrow">289 (38.0%)</td>
+</tr>
+<tr class="even">
+<td class="rowlabel firstrow">Education (years)</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="odd">
+<td class="rowlabel">≤18 years</td>
+<td>656 (94.3%)</td>
+<td>59 (92.2%)</td>
+<td>715 (94.1%)</td>
+</tr>
+<tr class="even">
+<td class="rowlabel lastrow">&gt;18 years</td>
+<td class="lastrow">40 (5.7%)</td>
+<td class="lastrow">5 (7.8%)</td>
+<td class="lastrow">45 (5.9%)</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel firstrow">Charlson Comorbidity Index</td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+<td class="firstrow"></td>
+</tr>
+<tr class="even">
+<td class="rowlabel">Mean (SD)</td>
+<td>0.619 (1.41)</td>
+<td>0.344 (0.963)</td>
+<td>0.596 (1.38)</td>
+</tr>
+<tr class="odd">
+<td class="rowlabel lastrow">Median [Min, Max]</td>
+<td class="lastrow">0 [0, 9.00]</td>
+<td class="lastrow">0 [0, 5.00]</td>
+<td class="lastrow">0 [0, 9.00]</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li>Of 760 participants included in the analysis, 696 (91.6%) were those who had one or more living family members at the onset of ADRD. 64 (8.4%) were those with no living family members.</li>
+<li>The mean of survival years after onset was 4.18 years among elders without family, compared with 4.64 years among elders with family.</li>
+</ul>
+</section>
+<section id="visualize-survival-experience" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-survival-experience">2.2. Visualize Survival Experience</h2>
+<ul>
+<li>Next, we will visualize survival experience comparing elders without family to elders with family. We are going to use the Kaplan-Meier curves.</li>
+</ul>
+<section id="create-a-survival-object" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-survival-object">2.2.1. Create a survival object</h3>
+<ul>
+<li>To create a plot for the Kaplan-Meier curves, first we need to create a survival object to use a survival function.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># recode the event variable (has to be numeric or boolean)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>flag_death <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(adrd_act<span class="sc">$</span>flag_death)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># recode the time variable (has to be numeric)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>surv_years <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(adrd_act<span class="sc">$</span>surv_years)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># survival function</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>adrd_act<span class="sc">$</span>tte <span class="ot">&lt;-</span> <span class="fu">Surv</span>(adrd_act<span class="sc">$</span>surv_years, adrd_act<span class="sc">$</span>flag_death)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">survfit</span>(adrd_act<span class="sc">$</span>tte <span class="sc">~</span> adrd_act<span class="sc">$</span>elder_orphan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="plot-the-kaplan-meier-estimator" class="level3">
+<h3 class="anchored" data-anchor-id="plot-the-kaplan-meier-estimator">2.2.2. Plot the Kaplan-Meier Estimator</h3>
+<ul>
+<li>The Kaplan-Meier estimator is widely used to estimate a survival function and visualize survival experience in clinical research.</li>
+<li>The below plot compares survival experience among elders without family to elders with family. This plot is NOT accounted for the other explanatory variable than <code>elder_orphan</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ggsurv <span class="ot">&lt;-</span> <span class="fu">ggsurvplot</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  km, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> adrd_act,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#surv.median.line = "hv",</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#title = "",</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#subtittle = "",</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">surv.plot.height =</span> <span class="dv">1</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">1</span>,                 <span class="co"># change line size</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">palette =</span> </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"#d8b365"</span>,<span class="st">"#5ab4ac"</span>),<span class="co"># custom color palettes</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">conf.int =</span> <span class="cn">TRUE</span>,          <span class="co"># add confidence interval</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">pval =</span> <span class="cn">TRUE</span>,             <span class="co"># add p-value (log-rank test)</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#pval.size = 6,</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">risk.table =</span> <span class="cn">TRUE</span>,        <span class="co"># add risk table. If you want %, "abs_pct" instead of TRUE</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">risk.table.fontsize =</span> <span class="dv">5</span>,</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">risk.table.col =</span> <span class="st">"black"</span>, <span class="co"># risk table color by groups = "strata"</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">risk.table.y.text =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">risk.table.height =</span> <span class="fl">0.25</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.labs =</span> </span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Elders with Family"</span>, <span class="st">"Elders without Family"</span>),    <span class="co"># change legend labels</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Years after onset"</span>,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncensor.plot =</span> F,</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">#ncensor.plot.height = 0.3, # useful to change when you have multiple groups</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggtheme =</span> <span class="fu">theme_classic</span>()      <span class="co"># change ggplot2 theme</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co"># change font sizes for html output</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>ggsurv<span class="sc">$</span>plot <span class="ot">&lt;-</span> ggsurv<span class="sc">$</span>plot <span class="sc">+</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>, <span class="at">color =</span> <span class="st">"black"</span>))</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>ggsurv<span class="sc">$</span>table <span class="ot">&lt;-</span> ggsurv<span class="sc">$</span>table <span class="sc">+</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>, <span class="at">color =</span> <span class="st">"black"</span>))</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>ggsurv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="code_sample_kariya_20250720_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>The above Kaplan-Meier curve represents what the probability of death is at a certain time interval. Time zero is at the onset of ADRD.</p></li>
+<li><p>The plot shows that the survival probabilities among elders with family are higher than the survival probabilities among elders without family (Log-rank test, p &lt; 0.05).</p></li>
+<li><p><strong>However, we cannot draw a conclusion yet, as the log-rank test does not account for any confounders.</strong></p></li>
+</ul>
+</section>
+</section>
+<section id="fit-a-cox-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="fit-a-cox-regression-model">2.3. Fit a Cox Regression Model</h2>
+<ul>
+<li>To adjust for confounding, we are going to fit the Cox proportional-hazards model to the dataset.</li>
+</ul>
+<section id="test-the-proportional-hazard-assumption" class="level3">
+<h3 class="anchored" data-anchor-id="test-the-proportional-hazard-assumption">2.3.1. Test the Proportional Hazard Assumption</h3>
+<ul>
+<li>Before we fit the model, we need to test proportionality. The Cox proportional-hazards model assumes that the hazard functions of the different strata formed by the levels of the covariates are proportional (Proportional Hazard assumption). It is important to assess whether data meet this assumption.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit a Cox proportional-hazards model to the dataset</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>orphan_ph <span class="ot">&lt;-</span> <span class="fu">coxph</span>(tte <span class="sc">~</span> elder_orphan <span class="sc">+</span> age_onset <span class="sc">+</span> educ_bin <span class="sc">+</span> sex <span class="sc">+</span> charlson, <span class="at">data =</span> adrd_act)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># global goodness-of-fit test</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>(test_ph <span class="ot">&lt;-</span> <span class="fu">cox.zph</span>(orphan_ph))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              chisq df     p
+elder_orphan 0.1412  1 0.707
+age_onset    2.5200  1 0.112
+educ_bin     0.0177  1 0.894
+sex          0.0480  1 0.827
+charlson     3.9938  1 0.046
+GLOBAL       6.2347  5 0.284</code></pre>
+</div>
+</div>
+<ul>
+<li><p>The output above shows p-values of the global goodness-of-fit test for each explanatory variable. The test is not statistically significant for the explanatory variables, except for Charlson Comorbidity Index (<code>charlson</code>). The global test is not statistically significant. Therefore, we can assume the proportional hazards.</p></li>
+<li><p>We can also visualize the Schoenfeld residuals for graphical diagnostics.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot Schoenfeld residuals</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>test_ph_plot <span class="ot">&lt;-</span> <span class="fu">ggcoxzph</span>(test_ph, <span class="at">resid =</span> <span class="cn">TRUE</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">df =</span> <span class="dv">4</span>, <span class="at">nsmo =</span> <span class="dv">40</span>, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">point.col =</span> <span class="st">"#ca0020"</span>, <span class="at">point.size =</span> <span class="dv">1</span>, <span class="at">point.shape =</span> <span class="dv">19</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">caption =</span> <span class="cn">NULL</span>, <span class="at">ggtheme =</span> <span class="fu">theme_survminer</span>())</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpar</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  test_ph_plot,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">font.title =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="st">"bold"</span>, <span class="st">"black"</span>),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">font.x =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="st">"bold"</span>, <span class="st">"black"</span>),</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">font.y =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="st">"bold"</span>, <span class="st">"black"</span>),</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">font.tickslab =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="st">"plain"</span>),</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="code_sample_kariya_20250720_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>From the plots above, we do not find any pattern with time.</li>
+</ul>
+</section>
+<section id="create-a-summary-table" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-summary-table">2.3.2. Create a Summary Table</h3>
+<ul>
+<li><p>As the dataset does not violate the proportional hazards assumption, fitting a Cox proportional-hazards model to this dataset is appropriate.</p></li>
+<li><p>A Cox proportional-hazards model estimates a hazard rate for individuals, adjusted for confounders. In this study, the hazard rate is the risk or probability of death, given that the participant has lived up to the specific time.</p></li>
+<li><p>The plot below shows an estimate of the hazard ratio and its 95% confidence interval. The hazard ratio is the ratio of the hazard rate comparing the levels of an explanatory variable.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fit a Cox proportional-hazards model to the dataset &amp; create a summary table</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coxph</span>(tte <span class="sc">~</span> elder_orphan <span class="sc">+</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        age_onset <span class="sc">+</span> educ_bin <span class="sc">+</span> sex <span class="sc">+</span> charlson, <span class="at">data =</span> adrd_act) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">tbl_regression</span>(<span class="at">exp =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="txttebfadb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#txttebfadb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#txttebfadb thead, #txttebfadb tbody, #txttebfadb tfoot, #txttebfadb tr, #txttebfadb td, #txttebfadb th {
+  border-style: none;
+}
+
+#txttebfadb p {
+  margin: 0;
+  padding: 0;
+}
+
+#txttebfadb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#txttebfadb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#txttebfadb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#txttebfadb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#txttebfadb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#txttebfadb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txttebfadb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#txttebfadb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#txttebfadb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#txttebfadb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#txttebfadb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#txttebfadb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#txttebfadb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#txttebfadb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#txttebfadb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#txttebfadb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#txttebfadb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#txttebfadb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#txttebfadb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txttebfadb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#txttebfadb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#txttebfadb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#txttebfadb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txttebfadb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#txttebfadb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#txttebfadb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txttebfadb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txttebfadb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#txttebfadb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txttebfadb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#txttebfadb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#txttebfadb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#txttebfadb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txttebfadb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#txttebfadb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#txttebfadb .gt_left {
+  text-align: left;
+}
+
+#txttebfadb .gt_center {
+  text-align: center;
+}
+
+#txttebfadb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#txttebfadb .gt_font_normal {
+  font-weight: normal;
+}
+
+#txttebfadb .gt_font_bold {
+  font-weight: bold;
+}
+
+#txttebfadb .gt_font_italic {
+  font-style: italic;
+}
+
+#txttebfadb .gt_super {
+  font-size: 65%;
+}
+
+#txttebfadb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#txttebfadb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#txttebfadb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#txttebfadb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#txttebfadb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#txttebfadb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#txttebfadb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#txttebfadb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#txttebfadb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="gt_col_headings header">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>HR</strong></th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong></th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Family situation</td>
+<td class="gt_row gt_center" headers="estimate"><br>
+</td>
+<td class="gt_row gt_center" headers="conf.low"><br>
+</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Elders with family</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Elders without family</td>
+<td class="gt_row gt_center" headers="estimate">1.24</td>
+<td class="gt_row gt_center" headers="conf.low">0.92, 1.67</td>
+<td class="gt_row gt_center" headers="p.value">0.15</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">Age at onset</td>
+<td class="gt_row gt_center" headers="estimate">1.07</td>
+<td class="gt_row gt_center" headers="conf.low">1.05, 1.09</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Education</td>
+<td class="gt_row gt_center" headers="estimate"><br>
+</td>
+<td class="gt_row gt_center" headers="conf.low"><br>
+</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;≤18 years</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;&gt;18 years</td>
+<td class="gt_row gt_center" headers="estimate">0.83</td>
+<td class="gt_row gt_center" headers="conf.low">0.56, 1.23</td>
+<td class="gt_row gt_center" headers="p.value">0.4</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">Sex at birth</td>
+<td class="gt_row gt_center" headers="estimate"><br>
+</td>
+<td class="gt_row gt_center" headers="conf.low"><br>
+</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Female</td>
+<td class="gt_row gt_center" headers="estimate">—</td>
+<td class="gt_row gt_center" headers="conf.low">—</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Male</td>
+<td class="gt_row gt_center" headers="estimate">1.36</td>
+<td class="gt_row gt_center" headers="conf.low">1.14, 1.62</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">Charlson Comorbidity Index</td>
+<td class="gt_row gt_center" headers="estimate">1.15</td>
+<td class="gt_row gt_center" headers="conf.low">1.09, 1.22</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+</tbody><tfoot class="gt_sourcenotes">
+<tr class="odd">
+<td colspan="4" class="gt_sourcenote">Abbreviations: CI = Confidence Interval, HR = Hazard Ratio</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+<ul>
+<li>From the plot below, an estimate of the hazard ratio comparing elders without family to elders with family is 1.24. This means that the risk of death among elders without family was estimated to be 24% higher compared to elders with family. However, as the 95% confidence interval crosses 1, there is insufficient evidence to conclude that the survival experience between those two groups are statistically significantly different. There is no difference between the groups.</li>
+</ul>
+</section>
+<section id="create-a-ropeladder-plot" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-ropeladder-plot">2.3.3. Create a Ropeladder Plot</h3>
+<ul>
+<li>We can also visualize the estimated hazard ratios and its 95% confidence interval. This plot makes it clear to see which hazard ratio is significant and comparte the hazard ratio estimates by explanatory variable.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load a dataset</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>sa_rope <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"survival_analysis_ropeladder_act.csv"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create a signif variable</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>sa_rope <span class="ot">&lt;-</span> sa_rope <span class="sc">%&gt;%</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">signif =</span> <span class="fu">case_when</span>(</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    lower <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> upper <span class="sc">&gt;</span> <span class="dv">1</span> <span class="sc">~</span> <span class="cn">TRUE</span>, <span class="co"># both bounds are above zero -&gt; TRUE(signif)</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    lower <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">&amp;</span> upper <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">~</span> <span class="cn">TRUE</span>, <span class="co"># both bounds are below zero -&gt; TRUE(signif)</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">FALSE</span>)) <span class="co"># everything else is FALSE(not signif)</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>sa_rope<span class="sc">$</span>signif <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(sa_rope<span class="sc">$</span>signif <span class="sc">==</span> <span class="cn">TRUE</span>, <span class="st">"Significant"</span>, <span class="st">"Insignificant"</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co"># replace TRUE to "Significant", FALSE to "Insignificant"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot a ropeladder plot</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>(rope_plot <span class="ot">&lt;-</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(sa_rope,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">y =</span> covariate, <span class="at">x =</span> hr, <span class="at">xmax =</span> upper, <span class="at">xmin =</span> lower,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">shape =</span> signif, <span class="at">fill =</span> signif)) <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrangeh</span>(<span class="fu">aes</span>(<span class="at">colour =</span> signif),</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">position =</span> <span class="fu">position_dodge2v</span>(<span class="at">height =</span> <span class="fl">0.7</span>)) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#0571b0"</span>, <span class="st">"#ca0020"</span>)) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">19</span>)) <span class="sc">+</span> <span class="co">#Non-signif-&gt; fillable circle(21)</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>)) <span class="sc">+</span> <span class="co">#Non-signif-&gt; fill it w. white</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">1.8</span>),</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>, <span class="fl">1.2</span>, <span class="fl">1.4</span>, <span class="fl">1.6</span>, <span class="fl">1.8</span>),</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span> ., <span class="at">labels =</span> <span class="cn">NULL</span>)) <span class="sc">+</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">shape =</span> <span class="st">"none"</span>, <span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">""</span>, <span class="at">x =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_linedraw</span>() <span class="sc">+</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme_cavis_vgrid + # theme no longer available</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="fu">c</span>(<span class="fl">0.83</span>, <span class="fl">0.125</span>),</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">13</span>),</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>),</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>)) <span class="sc">+</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"sex"</span> <span class="ot">=</span> <span class="st">"Male"</span>,</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"elder_orphans"</span> <span class="ot">=</span> <span class="st">"Without Family"</span>,</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"education_bin"</span> <span class="ot">=</span> <span class="st">"College Educated"</span>,</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"charlson"</span> <span class="ot">=</span> <span class="st">"Charlson Comorbidity Index</span><span class="sc">\n</span><span class="st">(1 score diff)"</span>,</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"age_onset"</span> <span class="ot">=</span> <span class="st">"Age at onset</span><span class="sc">\n</span><span class="st">(1 age diff)"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="code_sample_kariya_20250720_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">2.3.4. Results</h3>
+<blockquote class="blockquote">
+<p>Of 760 elders with ADRD, 696 (91.6%) were elders who had one or more living spouses or children at the onset of ADRD. 64 (8.4%) were elders who did not have any living spouses or children at the onset of ADRD. The hazard of death among elders without family was estimated to be 24% higher compared to elders with family (HR = 1.24; 95% CI = [0.92, 1.67]). However, survival experience among elders without family was not statistically different from elders with family (Cox PH model, p-value &gt; 0.05).</p>
+</blockquote>
+</section>
+<section id="limitations" class="level3">
+<h3 class="anchored" data-anchor-id="limitations">2.3.5. Limitations</h3>
+<ul>
+<li>Limited sample size
+<ul>
+<li>Elders without family (64, 8.4%) vs.&nbsp;with family (696, 91.6%).</li>
+</ul></li>
+<li>Missing values
+<ul>
+<li>11.6% of the total 848 participants.</li>
+</ul></li>
+<li>Family situation change
+<ul>
+<li>Recorded at the onset of ADRD.</li>
+</ul></li>
+<li>Living situation
+<ul>
+<li>Elders with family – living with them vs.&nbsp;living apart from them.</li>
+</ul></li>
+<li>Lack of generalizability
+<ul>
+<li>90% of the participants were non-Hispanic White who have a membership at Kaiser Permanente.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>3. Conclusion</h1>
+<blockquote class="blockquote">
+<p><strong>This study found that elders without family live as long as elders with family among those diagnosed with ADRD. Future research is needed to gain an understanding of situations and challenges elder orphans face by assessing other health outcomes (i.e.&nbsp;time to nursing home).</strong></p>
+</blockquote>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
