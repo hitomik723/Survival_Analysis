@@ -2,7 +2,7 @@
 title: "Alzheimer’s Disease Research Study"
 subtitle: "Effect of Family Support on Survival Experience among Elders with Alzheimer’s Disease and Related Dementias (ADRD)"
 author: "Hitomi Kariya"
-date: "July 20, 2025"
+date: today
 format:
   html:
     preserve_yaml: true
