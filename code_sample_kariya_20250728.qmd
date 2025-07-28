@@ -60,8 +60,8 @@ packages <- c(
   "table1", # create table1
   "data.table", # setnames
   "gtsummary", # create summary tables
-  "broom.helpers", #coxph+gtsummary
-  "labelled" #coxph+gtsummary
+  "broom.helpers", # coxph + gtsummary
+  "labelled" # manipulate labelled data
 )
 
 lapply(packages, library, character.only = TRUE)
@@ -221,7 +221,7 @@ adrd_act$educ_bin <-
 #| warning: false
 #| message: false
 
-# create a variable for the study end date (Sep 30, 2016)
+# create a variable for the study end date (Sept 30, 2016)
 adrd_act$end_date <- "2016-09-30"
 adrd_act$end_date <- as.Date(adrd_act$end_date)
 
@@ -248,7 +248,7 @@ adrd_act$surv_years <-
 #| warning: false
 #| message: false
 
-# check if there is NA values
+# check if there are any NA values
 adrd_act %>% filter(is.na(surv_years)) # no NA
 ```
 
@@ -277,7 +277,6 @@ var_label(adrd_act) <- list(
   educ_bin = "Education",
   charlson = "Charlson Comorbidity Index"
 )
-
 
 # add units to variables
 units(adrd_act$educ_bin) <- "years"
@@ -336,7 +335,7 @@ ggsurv <- ggsurvplot(
   conf.int = TRUE,          # add confidence interval
   pval = TRUE,             # add p-value (log-rank test)
   #pval.size = 6,
-  risk.table = TRUE,        # add risk table. If you want %, "abs_pct" instead of TRUE
+  risk.table = TRUE,        # add risk table. for %, "abs_pct" instead of TRUE
   risk.table.fontsize = 5,
   risk.table.col = "black", # risk table color by groups = "strata"
   risk.table.y.text = FALSE,
@@ -345,7 +344,7 @@ ggsurv <- ggsurvplot(
     c("Elders with Family", "Elders without Family"),    # change legend labels
   xlab = "Years after onset",
   ncensor.plot = F,
-  #ncensor.plot.height = 0.3, # useful to change when you have multiple groups
+  #ncensor.plot.height = 0.3, # change when you have multiple groups
   ggtheme = theme_classic()      # change ggplot2 theme
 )
 
@@ -423,7 +422,7 @@ ggpar(
 ```{r}
 #| echo: true
 
-# fit a Cox proportional-hazards model to the dataset & create a summary table
+# fit a Cox proportional-hazards model to the data & create a summary table
 coxph(tte ~ elder_orphan + 
         age_onset + educ_bin + sex + charlson, data = adrd_act) %>% 
   gtsummary::tbl_regression(exp = TRUE)
@@ -468,15 +467,14 @@ sa_rope$signif <- ifelse(sa_rope$signif == TRUE, "Significant", "Insignificant")
   geom_pointrangeh(aes(colour = signif),
                    position = position_dodge2v(height = 0.7)) +
   scale_colour_manual(values = c("#0571b0", "#ca0020")) +
-  scale_shape_manual(values = c(19, 19)) + #Non-signif-> fillable circle(21)
-  scale_fill_manual(values = c(NA, NA)) + #Non-signif-> fill it w. white
+  scale_shape_manual(values = c(19, 19)) + # Non-signif-> fillable circle(21)
+  scale_fill_manual(values = c(NA, NA)) + # Non-signif-> fill it w. white
   scale_x_continuous(limits = c(0.4, 1.8),
                      breaks = c(0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8),
                      sec.axis = sec_axis(~ ., labels = NULL)) +
   guides(shape = "none", fill = "none") +
   labs(y = "", x = "") +
   theme_linedraw() +
-  #theme_cavis_vgrid + # theme no longer available
   theme(legend.position = c(0.83, 0.125),
         legend.text = element_text(size = 13),
         axis.ticks.x = element_blank(),
