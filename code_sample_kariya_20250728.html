@@ -123,7 +123,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Alzheimer’s Disease Research Study</h1>
-<p class="subtitle lead">Effect of Family Support on Survival Experience among Elders with Alzheimer’s Disease and Related Dementias (ADRD)</p>
+<p class="subtitle lead"></p><p>Effect of Family Support on Survival Experience among Elders<br>
+with Alzheimer’s Disease and Related Dementias (ADRD)</p><p></p>
 </div>
 
 
@@ -167,8 +168,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="l-body-outset">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 24%">
-<col style="width: 76%">
+<col style="width: 26%">
+<col style="width: 73%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -201,23 +202,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove all objects in the environment</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># import libraries</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(foreign) <span class="co"># import Stata file</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven) <span class="co"># import Stata file</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival) <span class="co"># plot survival curves using R base graphs</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer) <span class="co"># plot survival curves using ggplot2</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RColorBrewer) <span class="co"># for nice colors</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel) <span class="co"># labels for ggplot2</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstance) <span class="co"># flipped version of geoms</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(table1) <span class="co"># create table1</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table) <span class="co"># setnames</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary) <span class="co"># create summary tables</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom.helpers) <span class="co">#coxph+gtsummary</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(labelled) <span class="co">#coxph+gtsummary</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># import the data set</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>adrd_act <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"adrd_act.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># load packaes</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"haven"</span>, <span class="co"># import Stata file</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"tidyverse"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"survival"</span>, <span class="co"># plot survival curves using R base graphs</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"survminer"</span>, <span class="co"># plot survival curves using ggplot2</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"RColorBrewer"</span>, <span class="co"># for nice colors</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ggrepel"</span>, <span class="co"># labels for ggplot2</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ggstance"</span>, <span class="co"># flipped version of geoms</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"table1"</span>, <span class="co"># create table1</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data.table"</span>, <span class="co"># setnames</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"gtsummary"</span>, <span class="co"># create summary tables</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"broom.helpers"</span>, <span class="co">#coxph+gtsummary</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"labelled"</span> <span class="co">#coxph+gtsummary</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(packages, library, <span class="at">character.only =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># import the data set</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>adrd_act <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"adrd_act.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="check-the-data-set" class="level2">
@@ -276,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 760 observations</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>There are many NA values in <code>death_date</code> and <code>withdraw_date</code>. <code>death_date</code> is filled with NA for participants who did not die during the study. <code>withdraw_date</code> is filled with NA for participants who did not disenroll from the study.</li>
+<li>There are many NA values in <code>death_date</code> and <code>withdraw_date</code>. <code>death_date</code> is filled with NA for participants who did not die during the study. <code>withdraw_date</code> is filled with NA for participants who did not dis-enroll from the study.</li>
 </ul>
 </section>
 <section id="modify-variables" class="level3">
@@ -403,7 +407,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="create-a-time-variable" class="level3">
 <h3 class="anchored" data-anchor-id="create-a-time-variable">1.3.4. Create a time variable</h3>
 <ul>
-<li>First, we are going to create a variable that indicates how many years each participant lived after the onset of ADRD.</li>
+<li>First, we are going to create a variable that indicates how many years each participant lived after the onset of ADRD.<br>
+</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a variable for the study end date (Sep 30, 2016)</span></span>
@@ -441,10 +446,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 24%">
-<col style="width: 76%">
-</colgroup>
 <thead>
 <tr class="header">
 <th>Variables</th>
@@ -469,20 +470,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Now, we have all the variables needed for our analysis. Let’s see the demographics of the dataset.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add labels to variables</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>surv_years) <span class="ot">&lt;-</span> <span class="st">"Years lived after onset"</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>elder_orphan) <span class="ot">&lt;-</span> <span class="st">"Family situation"</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>age_onset) <span class="ot">&lt;-</span> <span class="st">"Age at onset"</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>race_bin) <span class="ot">&lt;-</span> <span class="st">"Race"</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>ethnicity_bin) <span class="ot">&lt;-</span> <span class="st">"Ethnicity"</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>sex) <span class="ot">&lt;-</span> <span class="st">"Sex at birth"</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>educ_bin) <span class="ot">&lt;-</span> <span class="st">"Education"</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">label</span>(adrd_act<span class="sc">$</span>charlson) <span class="ot">&lt;-</span> <span class="st">"Charlson Comorbidity Index"</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># add units to variables</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(adrd_act<span class="sc">$</span>educ_bin) <span class="ot">&lt;-</span> <span class="st">"years"</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>(table1 <span class="ot">&lt;-</span> <span class="fu">table1</span>(<span class="sc">~</span> surv_years <span class="sc">+</span> age_onset <span class="sc">+</span> race_bin <span class="sc">+</span> ethnicity_bin <span class="sc">+</span> sex <span class="sc">+</span> educ_bin <span class="sc">+</span> charlson <span class="sc">|</span> elder_orphan, <span class="at">data =</span> adrd_act))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var_label</span>(adrd_act) <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">surv_years =</span> <span class="st">"Years lived after onset"</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">elder_orphan =</span> <span class="st">"Family situation"</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_onset =</span> <span class="st">"Age at onset"</span>, </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">race_bin =</span> <span class="st">"Race"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ethnicity_bin =</span> <span class="st">"Ethnicity"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex =</span> <span class="st">"Sex at birth"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">educ_bin =</span> <span class="st">"Education"</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">charlson =</span> <span class="st">"Charlson Comorbidity Index"</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># add units to variables</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="fu">units</span>(adrd_act<span class="sc">$</span>educ_bin) <span class="ot">&lt;-</span> <span class="st">"years"</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>(table1 <span class="ot">&lt;-</span> <span class="fu">table1</span>(<span class="sc">~</span> surv_years <span class="sc">+</span> age_onset <span class="sc">+</span> race_bin <span class="sc">+</span> ethnicity_bin <span class="sc">+</span> sex <span class="sc">+</span> educ_bin <span class="sc">+</span> charlson <span class="sc">|</span> elder_orphan, <span class="at">data =</span> adrd_act))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="Rtable1">
 <table class="Rtable1 caption-top table table-sm table-striped small" data-quarto-postprocess="true">
@@ -793,23 +796,23 @@ GLOBAL       6.2347  5 0.284</code></pre>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        age_onset <span class="sc">+</span> educ_bin <span class="sc">+</span> sex <span class="sc">+</span> charlson, <span class="at">data =</span> adrd_act) <span class="sc">%&gt;%</span> </span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  gtsummary<span class="sc">::</span><span class="fu">tbl_regression</span>(<span class="at">exp =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="tgtddhecdm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#tgtddhecdm table {
+<div id="jienjhweti" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jienjhweti table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tgtddhecdm thead, #tgtddhecdm tbody, #tgtddhecdm tfoot, #tgtddhecdm tr, #tgtddhecdm td, #tgtddhecdm th {
+#jienjhweti thead, #jienjhweti tbody, #jienjhweti tfoot, #jienjhweti tr, #jienjhweti td, #jienjhweti th {
   border-style: none;
 }
 
-#tgtddhecdm p {
+#jienjhweti p {
   margin: 0;
   padding: 0;
 }
 
-#tgtddhecdm .gt_table {
+#jienjhweti .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -835,12 +838,12 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#tgtddhecdm .gt_caption {
+#jienjhweti .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tgtddhecdm .gt_title {
+#jienjhweti .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -852,7 +855,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-bottom-width: 0;
 }
 
-#tgtddhecdm .gt_subtitle {
+#jienjhweti .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -864,7 +867,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-top-width: 0;
 }
 
-#tgtddhecdm .gt_heading {
+#jienjhweti .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -876,13 +879,13 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tgtddhecdm .gt_bottom_border {
+#jienjhweti .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tgtddhecdm .gt_col_headings {
+#jienjhweti .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -897,7 +900,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tgtddhecdm .gt_col_heading {
+#jienjhweti .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -917,7 +920,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   overflow-x: hidden;
 }
 
-#tgtddhecdm .gt_column_spanner_outer {
+#jienjhweti .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -929,15 +932,15 @@ GLOBAL       6.2347  5 0.284</code></pre>
   padding-right: 4px;
 }
 
-#tgtddhecdm .gt_column_spanner_outer:first-child {
+#jienjhweti .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tgtddhecdm .gt_column_spanner_outer:last-child {
+#jienjhweti .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tgtddhecdm .gt_column_spanner {
+#jienjhweti .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -949,11 +952,11 @@ GLOBAL       6.2347  5 0.284</code></pre>
   width: 100%;
 }
 
-#tgtddhecdm .gt_spanner_row {
+#jienjhweti .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tgtddhecdm .gt_group_heading {
+#jienjhweti .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -979,7 +982,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   text-align: left;
 }
 
-#tgtddhecdm .gt_empty_group_heading {
+#jienjhweti .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -994,15 +997,15 @@ GLOBAL       6.2347  5 0.284</code></pre>
   vertical-align: middle;
 }
 
-#tgtddhecdm .gt_from_md > :first-child {
+#jienjhweti .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tgtddhecdm .gt_from_md > :last-child {
+#jienjhweti .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tgtddhecdm .gt_row {
+#jienjhweti .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1021,7 +1024,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   overflow-x: hidden;
 }
 
-#tgtddhecdm .gt_stub {
+#jienjhweti .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1034,7 +1037,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   padding-right: 5px;
 }
 
-#tgtddhecdm .gt_stub_row_group {
+#jienjhweti .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1048,15 +1051,15 @@ GLOBAL       6.2347  5 0.284</code></pre>
   vertical-align: top;
 }
 
-#tgtddhecdm .gt_row_group_first td {
+#jienjhweti .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tgtddhecdm .gt_row_group_first th {
+#jienjhweti .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tgtddhecdm .gt_summary_row {
+#jienjhweti .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1066,16 +1069,16 @@ GLOBAL       6.2347  5 0.284</code></pre>
   padding-right: 5px;
 }
 
-#tgtddhecdm .gt_first_summary_row {
+#jienjhweti .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tgtddhecdm .gt_first_summary_row.thick {
+#jienjhweti .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tgtddhecdm .gt_last_summary_row {
+#jienjhweti .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1085,7 +1088,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#tgtddhecdm .gt_grand_summary_row {
+#jienjhweti .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1095,7 +1098,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   padding-right: 5px;
 }
 
-#tgtddhecdm .gt_first_grand_summary_row {
+#jienjhweti .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1105,7 +1108,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#tgtddhecdm .gt_last_grand_summary_row_top {
+#jienjhweti .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1115,11 +1118,11 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#tgtddhecdm .gt_striped {
+#jienjhweti .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tgtddhecdm .gt_table_body {
+#jienjhweti .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1128,7 +1131,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#tgtddhecdm .gt_footnotes {
+#jienjhweti .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1142,7 +1145,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tgtddhecdm .gt_footnote {
+#jienjhweti .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1151,7 +1154,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   padding-right: 5px;
 }
 
-#tgtddhecdm .gt_sourcenotes {
+#jienjhweti .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1165,7 +1168,7 @@ GLOBAL       6.2347  5 0.284</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#tgtddhecdm .gt_sourcenote {
+#jienjhweti .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1173,72 +1176,72 @@ GLOBAL       6.2347  5 0.284</code></pre>
   padding-right: 5px;
 }
 
-#tgtddhecdm .gt_left {
+#jienjhweti .gt_left {
   text-align: left;
 }
 
-#tgtddhecdm .gt_center {
+#jienjhweti .gt_center {
   text-align: center;
 }
 
-#tgtddhecdm .gt_right {
+#jienjhweti .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tgtddhecdm .gt_font_normal {
+#jienjhweti .gt_font_normal {
   font-weight: normal;
 }
 
-#tgtddhecdm .gt_font_bold {
+#jienjhweti .gt_font_bold {
   font-weight: bold;
 }
 
-#tgtddhecdm .gt_font_italic {
+#jienjhweti .gt_font_italic {
   font-style: italic;
 }
 
-#tgtddhecdm .gt_super {
+#jienjhweti .gt_super {
   font-size: 65%;
 }
 
-#tgtddhecdm .gt_footnote_marks {
+#jienjhweti .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tgtddhecdm .gt_asterisk {
+#jienjhweti .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tgtddhecdm .gt_indent_1 {
+#jienjhweti .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tgtddhecdm .gt_indent_2 {
+#jienjhweti .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tgtddhecdm .gt_indent_3 {
+#jienjhweti .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tgtddhecdm .gt_indent_4 {
+#jienjhweti .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tgtddhecdm .gt_indent_5 {
+#jienjhweti .gt_indent_5 {
   text-indent: 25px;
 }
 
-#tgtddhecdm .katex-display {
+#jienjhweti .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#tgtddhecdm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#jienjhweti div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
